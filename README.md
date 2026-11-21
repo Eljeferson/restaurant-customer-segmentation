@@ -10,6 +10,7 @@ Replication package and code repository for the empirical study:
 ```
 ├── customer_segmentation_kmeans_nlp.ipynb   # Complete analysis workflow (preprocessing, NLP benchmark, K-means, ablation, surrogate RF)
 ├── generar_figuras_600dpi.py                # Publication-grade (600 DPI) visualization generation script
+├── tfidf_table11.py                         # Keyword extraction protocol for review-level profiles (Table 11)
 ├── requirements.txt                         # Required Python libraries and dependencies
 ├── data/
 │   ├── sentiment_spanish_benchmark_50k.csv  # Stratified benchmark corpus (50,000 reviews with RoBERTuito, XLM-R, TextBlob features)
