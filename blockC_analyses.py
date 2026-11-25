@@ -149,6 +149,7 @@ R["random_split_reference"] = eval_split(tr, te, F5)
 # 3) R2-6 y R2-5: margen Δd vs. Random Forest, abstención y regla simple
 print("4. Voronoi margin Δd vs Random Forest...")
 Dm = np.sort(m5.transform(X5), axis=1); dd = (Dm[:, 1] - Dm[:, 0])[te]
+dd_all = (Dm[:, 1] - Dm[:, 0])
 rf = RandomForestClassifier(200, random_state=SEED, n_jobs=-1).fit(X5[tr], m5.labels_[tr])
 P = rf.predict_proba(X5[te]); pmax = P.max(1); yhat = rf.classes_[P.argmax(1)]; yc = m5.labels_[te]
 low, lowp = dd < 0.20, pmax < 0.90
@@ -160,6 +161,10 @@ R["margin_vs_rf"] = dict(n_test=len(te), share_dd_lt_020=low.mean(),
     share_p_lt_090=lowp.mean(), jaccard_low_margin_vs_low_p=(low & lowp).sum() / max((low | lowp).sum(), 1),
     abstention={str(t): dict(coverage=(dd >= t).mean(),
         rf_centroid_agreement_retained=(yhat[dd >= t] == yc[dd >= t]).mean()) for t in (0.1, 0.2, 0.5)})
+
+R["margin_all_50k"] = dict(mean=float(dd_all.mean().round(4)), median=float(np.median(dd_all).round(4)),
+    p5=float(np.percentile(dd_all, 5).round(4)), p1=float(np.percentile(dd_all, 1).round(4)),
+    shares_lt={str(t): round(float((dd_all < t).mean() * 100), 2) for t in (0.1, 0.2, 0.5)})
 
 stars, likes = d[C["stars"]].to_numpy(), d[C["likes"]].to_numpy()
 hi_neg, lo_pos = (stars >= 4) & (d["sent"] < 0), (stars <= 2) & (d["sent"] > 0.5)
@@ -203,5 +208,9 @@ def clean(o):
 
 out_path = r"C:\Users\USER\Desktop\Articulos Restaurante\blockC_results.json"
 json.dump(clean(R), open(out_path, "w", encoding="utf-8"), indent=1, ensure_ascii=False)
+print("\nVoronoi Margin (50k):")
+print({t: round((dd_all < t).mean()*100, 2) for t in (0.1, 0.2, 0.5)},
+      "mean", dd_all.mean().round(4), "median", np.median(dd_all).round(4),
+      "p5", np.percentile(dd_all, 5).round(4))
 print("\nFINISHED! Results saved to blockC_results.json")
 print(json.dumps(clean(R), indent=1, ensure_ascii=False))

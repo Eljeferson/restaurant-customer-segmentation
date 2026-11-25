@@ -31,7 +31,9 @@ plt.rcParams.update({
 
 p_dir = os.path.dirname(os.path.abspath(__file__))
 f_dir = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "figures"))
+f_dir_root = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", "figures"))
 os.makedirs(f_dir, exist_ok=True)
+os.makedirs(f_dir_root, exist_ok=True)
 
 df_50k = pd.read_csv(os.path.join(p_dir, "sentiment_spanish_benchmark_50k.csv"), low_memory=False)
 df_50k["sat_robertuito"] = 0.5 * df_50k["score_norm"] + 0.5 * (df_50k["sent_robertuito"] + 1) / 2
@@ -58,6 +60,7 @@ def save_both(fig, names_pdir, names_fdir):
         fig.savefig(os.path.join(p_dir, n), dpi=600, bbox_inches="tight")
     for n in names_fdir:
         fig.savefig(os.path.join(f_dir, n), dpi=600, bbox_inches="tight")
+        fig.savefig(os.path.join(f_dir_root, n), dpi=600, bbox_inches="tight")
     plt.close(fig)
 
 # ---------------------------------------------------------
@@ -279,8 +282,8 @@ sns.heatmap(cm, annot=True, fmt=",d", cmap="Blues", cbar=False, ax=axes[0],
             xticklabels=["C0", "C1", "C2"], yticklabels=["C0", "C1", "C2"],
             annot_kws={"size": 8.5, "weight": "bold"}, linewidths=0.5, linecolor="gray")
 axes[0].set_title("(a) Confusion Matrix (Hold-out Test, n=10,000)", fontweight="bold", fontsize=9.0)
-axes[0].set_xlabel("Predicted Segment")
-axes[0].set_ylabel("K-means Segment")
+axes[0].set_xlabel("Predicted Profile")
+axes[0].set_ylabel("K-means Profile")
 
 imp_s = pd.Series(rf_rob.feature_importances_, index=SHORT_LABELS).sort_values(ascending=True)
 bars = axes[1].barh(imp_s.index, imp_s.values, color="#2b5c8f", edgecolor="black", height=0.55, linewidth=0.5)
@@ -311,18 +314,18 @@ b_r = ax.bar(x - w/2, acc_rob, w, label="RoBERTuito Pipeline", color="#1b9e77", 
 b_t = ax.bar(x + w/2, acc_tb, w, label="TextBlob Baseline", color="#7570b3", edgecolor="black", linewidth=0.5)
 
 ax.set_ylabel("Partition Replication Accuracy (%)")
-ax.set_title("Marginal Feature Contribution to Assignment", fontweight="bold")
+ax.set_title("Marginal Feature Contribution to Profile Replication", fontweight="bold")
 ax.set_xticks(x)
 ax.set_xticklabels(stages, fontsize=7.8)
 ax.set_ylim(80, 105.5)
 for bar in b_r:
     h = bar.get_height()
-    lbl = "100%" if h >= 99.99 else f"{h:.1f}%"
+    lbl = "100%" if h >= 99.95 else f"{round(h + 1e-9, 1):.1f}%"
     ax.annotate(lbl, (bar.get_x() + bar.get_width()/2, h),
                 ha="center", va="bottom", fontsize=6.8, xytext=(-1, 2), textcoords="offset points")
 for bar in b_t:
     h = bar.get_height()
-    lbl = f"{h:.1f}%"
+    lbl = "100%" if h >= 99.95 else f"{round(h + 1e-9, 1):.1f}%"
     ax.annotate(lbl, (bar.get_x() + bar.get_width()/2, h),
                 ha="center", va="bottom", fontsize=6.8, xytext=(1, 2), textcoords="offset points")
 ax.legend(loc="lower right", frameon=True, fontsize=7.5)
