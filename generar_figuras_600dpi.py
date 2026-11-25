@@ -29,8 +29,8 @@ plt.rcParams.update({
     "savefig.dpi": 600,
 })
 
-p_dir = r"d:\CORRECCION DE DOCUMENTOS\ARTICULO RESTAURANTE\Predicción de Preferencias Gastronómicas"
-f_dir = r"d:\CORRECCION DE DOCUMENTOS\ARTICULO RESTAURANTE\figures"
+p_dir = os.path.dirname(os.path.abspath(__file__))
+f_dir = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "figures"))
 os.makedirs(f_dir, exist_ok=True)
 
 df_50k = pd.read_csv(os.path.join(p_dir, "sentiment_spanish_benchmark_50k.csv"), low_memory=False)
@@ -191,7 +191,7 @@ vis_idx = np.random.RandomState(42).choice(len(X_pca), 6000, replace=False)
 fig, ax = plt.subplots(figsize=(3.35, 2.6))
 c_colors = {0: "#1f77b4", 1: "#2ca02c", 2: "#d62728"}
 c_names = {
-    0: "C0: Advocates (6.3%)",
+    0: "C0: Socially Endorsed (6.3%)",
     1: "C1: Passive (75.9%)",
     2: "C2: Critical (17.8%)"
 }
@@ -208,7 +208,7 @@ ax.scatter(cent_pca[:, 0], cent_pca[:, 1], c="black", s=35, marker="X", zorder=6
 
 ax.set_xlabel(f"PC1 ({var_exp[0]:.1f}% variance)")
 ax.set_ylabel(f"PC2 ({var_exp[1]:.1f}% variance)")
-ax.set_title(f"PCA Cluster Projection (Total: {tot_var:.1f}%)", fontweight="bold")
+ax.set_title(f"Review-Level Profile Projection (Total: {tot_var:.1f}%)", fontweight="bold")
 ax.legend(loc="upper left", markerscale=1.1, frameon=True, fontsize=7.5)
 ax.grid(alpha=0.25, linestyle="--")
 plt.tight_layout()
@@ -256,9 +256,9 @@ for c in [0, 1, 2]:
                     color="white", fontweight="bold", fontsize=8.0)
     bottom += vals
 
-ax.set_ylabel("Segment Share (%)")
+ax.set_ylabel("Profile Share (%)")
 ax.set_ylim(0, 108)
-ax.set_title("Customer Segments Across Platforms", fontweight="bold")
+ax.set_title("Review-Level Profiles Across Platforms", fontweight="bold")
 ax.legend(loc="upper center", bbox_to_anchor=(0.5, -0.15), ncol=2, frameon=True, fontsize=7.5)
 ax.grid(axis="y", alpha=0.25, linestyle="--")
 plt.tight_layout()
@@ -362,14 +362,14 @@ p_c0 = [0.996, 0.000, 0.002]
 p_c1 = [0.004, 0.001, 0.998]
 p_c2 = [0.000, 0.999, 0.000]
 y_pos = np.arange(len(cases_lbl))
-axes[1].barh(y_pos, p_c0, color=c_colors[0], edgecolor="white", height=0.5, label="C0: Advocates")
+axes[1].barh(y_pos, p_c0, color=c_colors[0], edgecolor="white", height=0.5, label="C0: Socially Endorsed")
 axes[1].barh(y_pos, p_c1, left=p_c0, color=c_colors[1], edgecolor="white", height=0.5, label="C1: Passive")
 axes[1].barh(y_pos, p_c2, left=np.array(p_c0)+np.array(p_c1), color=c_colors[2], edgecolor="white", height=0.5, label="C2: Critical")
 axes[1].set_yticks(y_pos)
 axes[1].set_yticklabels(cases_lbl, fontsize=7.8)
-axes[1].set_xlabel("Assigned Segment Probability")
+axes[1].set_xlabel("Random Forest surrogate score (uncalibrated)")
 axes[1].set_xlim(0, 1.0)
-axes[1].set_title("(b) Real-Time Assignment Probabilities (New Reviews)", fontweight="bold", fontsize=8.8)
+axes[1].set_title("(b) Surrogate partition scores (illustrative reviews)", fontweight="bold", fontsize=8.8)
 axes[1].legend(loc="upper center", bbox_to_anchor=(0.5, -0.36), ncol=3, fontsize=7.0, frameon=True)
 axes[1].grid(axis="x", alpha=0.3, linestyle="--")
 
