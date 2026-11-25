@@ -1,0 +1,383 @@
+{
+ "sanity_refit_vs_label": {
+  "ari": 1.0,
+  "agree": 1.0
+ },
+ "platform": {
+  "googleplaces": {
+   "n": 45810,
+   "features": [
+    "score_norm",
+    "sent",
+    "sat",
+    "likes_log",
+    "freq_log"
+   ],
+   "shares": {
+    "0": 6.78,
+    "1": 17.93,
+    "2": 75.29
+   },
+   "silhouette": 0.5063,
+   "ari_vs_global": 0.9923,
+   "agree_vs_global": 0.9973,
+   "means": {
+    "0": {
+     "score_norm": 0.894,
+     "sent": 0.701,
+     "sat": 0.872,
+     "likes_log": 0.76,
+     "freq_log": 1.795
+    },
+    "1": {
+     "score_norm": 0.482,
+     "sent": -0.51,
+     "sat": 0.363,
+     "likes_log": 0.032,
+     "freq_log": 1.651
+    },
+    "2": {
+     "score_norm": 0.915,
+     "sent": 0.7,
+     "sat": 0.882,
+     "likes_log": 0.0,
+     "freq_log": 1.645
+    }
+   }
+  },
+  "tripadvisor": {
+   "n": 4190,
+   "features": [
+    "score_norm",
+    "sent",
+    "sat",
+    "freq_log"
+   ],
+   "shares": {
+    "0": 28.28,
+    "1": 14.34,
+    "2": 57.37
+   },
+   "silhouette": 0.4393,
+   "ari_vs_global": 0.3958,
+   "agree_vs_global": 0.7169,
+   "means": {
+    "0": {
+     "score_norm": 0.824,
+     "sent": 0.856,
+     "sat": 0.876,
+     "likes_log": 0.0,
+     "freq_log": 2.881
+    },
+    "1": {
+     "score_norm": 0.488,
+     "sent": -0.652,
+     "sat": 0.331,
+     "likes_log": 0.0,
+     "freq_log": 1.678
+    },
+    "2": {
+     "score_norm": 0.913,
+     "sent": 0.904,
+     "sat": 0.932,
+     "likes_log": 0.0,
+     "freq_log": 1.108
+    }
+   }
+  }
+ },
+ "harmonized_4f": {
+  "shares": {
+   "0": 32.99,
+   "1": 50.04,
+   "2": 16.96
+  },
+  "silhouette": 0.3705,
+  "ari_vs_global": 0.3583,
+  "agree_vs_global": 0.656,
+  "crosstab_global_x_4f": {
+   "0": {
+    "0": 1333,
+    "1": 14723,
+    "2": 441
+   },
+   "1": {
+    "0": 1564,
+    "1": 23244,
+    "2": 214
+   },
+   "2": {
+    "0": 251,
+    "1": 5,
+    "2": 8225
+   }
+  },
+  "by_platform": {
+   "0": {
+    "googleplaces": 0.3293,
+    "tripadvisor": 0.337
+   },
+   "1": {
+    "googleplaces": 0.4983,
+    "tripadvisor": 0.5239
+   },
+   "2": {
+    "googleplaces": 0.1724,
+    "tripadvisor": 0.1391
+   }
+  },
+  "means": {
+   "0": {
+    "score_norm": 0.882,
+    "sent": 0.714,
+    "sat": 0.869,
+    "likes_log": 0.062,
+    "freq_log": 2.581
+   },
+   "1": {
+    "score_norm": 0.927,
+    "sent": 0.71,
+    "sat": 0.891,
+    "likes_log": 0.047,
+    "freq_log": 1.068
+   },
+   "2": {
+    "score_norm": 0.471,
+    "sent": -0.548,
+    "sat": 0.349,
+    "likes_log": 0.051,
+    "freq_log": 1.61
+   }
+  }
+ },
+ "temporal": {
+  "cutoff": "2023-10-01",
+  "n_dated": 50000,
+  "five_features_past_freq": {
+   "n_train": 40000,
+   "n_test": 10000,
+   "rf_fidelity_test": 0.9995,
+   "ari_train_model_vs_test_refit": 0.3709,
+   "agree_train_model_vs_test_refit": 0.6913,
+   "ari_vs_global": 0.9944,
+   "silhouette_test": 0.4812,
+   "shares_test": {
+    "0": 75.91,
+    "1": 18.37,
+    "2": 5.72
+   }
+  },
+  "four_features_no_likes_past_freq": {
+   "n_train": 40000,
+   "n_test": 10000,
+   "rf_fidelity_test": 0.9978,
+   "ari_train_model_vs_test_refit": 0.7927,
+   "agree_train_model_vs_test_refit": 0.9329,
+   "ari_vs_global": 0.3434,
+   "silhouette_test": 0.4326,
+   "shares_test": {
+    "0": 16.14,
+    "1": 49.64,
+    "2": 34.22
+   }
+  },
+  "five_features_full_freq": {
+   "n_train": 40000,
+   "n_test": 10000,
+   "rf_fidelity_test": 0.9997,
+   "ari_train_model_vs_test_refit": 0.9635,
+   "agree_train_model_vs_test_refit": 0.9904,
+   "ari_vs_global": 0.9972,
+   "silhouette_test": 0.5368,
+   "shares_test": {
+    "0": 18.3,
+    "1": 75.98,
+    "2": 5.72
+   }
+  }
+ },
+ "grouped_restaurant": {
+  "rf_fidelity_test": {
+   "mean": 0.9998,
+   "sd": 0.0001
+  },
+  "ari_train_model_vs_test_refit": {
+   "mean": 0.8623,
+   "sd": 0.28
+  },
+  "agree_train_model_vs_test_refit": {
+   "mean": 0.9301,
+   "sd": 0.1489
+  },
+  "ari_vs_global": {
+   "mean": 0.9984,
+   "sd": 0.0018
+  },
+  "silhouette_test": {
+   "mean": 0.5138,
+   "sd": 0.0044
+  }
+ },
+ "grouped_user": {
+  "rf_fidelity_test": {
+   "mean": 0.9995,
+   "sd": 0.0006
+  },
+  "ari_train_model_vs_test_refit": {
+   "mean": 0.8666,
+   "sd": 0.2774
+  },
+  "agree_train_model_vs_test_refit": {
+   "mean": 0.9331,
+   "sd": 0.144
+  },
+  "ari_vs_global": {
+   "mean": 0.8743,
+   "sd": 0.2809
+  },
+  "silhouette_test": {
+   "mean": 0.4763,
+   "sd": 0.0837
+  }
+ },
+ "random_split_reference": {
+  "n_train": 40000,
+  "n_test": 10000,
+  "rf_fidelity_test": 0.9999,
+  "ari_train_model_vs_test_refit": 0.996,
+  "agree_train_model_vs_test_refit": 0.9989,
+  "ari_vs_global": 0.9996,
+  "silhouette_test": 0.5096,
+  "shares_test": {
+   "0": 75.95,
+   "1": 17.75,
+   "2": 6.3
+  }
+ },
+ "margin_vs_rf": {
+  "n_test": 10000,
+  "share_dd_lt_020": 0.0209,
+  "share_lowmargin_with_p_gt_095": 0.933,
+  "spearman_dd_pmax": 0.1572,
+  "rf_disagreement_low_margin": 0.0,
+  "rf_disagreement_high_margin": 0.0,
+  "share_p_lt_090": 0.0011,
+  "jaccard_low_margin_vs_low_p": 0.0377,
+  "abstention": {
+   "0.1": {
+    "coverage": 0.9893,
+    "rf_centroid_agreement_retained": 1.0
+   },
+   "0.2": {
+    "coverage": 0.9791,
+    "rf_centroid_agreement_retained": 1.0
+   },
+   "0.5": {
+    "coverage": 0.9491,
+    "rf_centroid_agreement_retained": 1.0
+   }
+  }
+ },
+ "rule_stars_le_2": {
+  "accuracy_vs_kmeans": 0.9011,
+  "ari": 0.638,
+  "crosstab": {
+   "0": {
+    "0": 3047,
+    "1": 0,
+    "2": 66
+   },
+   "1": {
+    "0": 0,
+    "1": 37902,
+    "2": 4706
+   },
+   "2": {
+    "0": 101,
+    "1": 70,
+    "2": 4108
+   }
+  },
+  "share_disagreements_with_text_rating_conflict": 0.2846
+ },
+ "rule_stars_le_3": {
+  "accuracy_vs_kmeans": 0.9197,
+  "ari": 0.7302,
+  "crosstab": {
+   "0": {
+    "0": 2759,
+    "1": 0,
+    "2": 0
+   },
+   "1": {
+    "0": 0,
+    "1": 35665,
+    "2": 1319
+   },
+   "2": {
+    "0": 389,
+    "1": 2307,
+    "2": 7561
+   }
+  },
+  "share_disagreements_with_text_rating_conflict": 0.3504
+ },
+ "text_rating_conflicts": {
+  "high_star_negative_text": 3575,
+  "high_star_negative_profiles": {
+   "0": 5.01,
+   "1": 58.1,
+   "2": 36.9
+  },
+  "low_star_positive_text": 245,
+  "low_star_positive_profiles": {
+   "0": 7.35,
+   "1": 28.57,
+   "2": 64.08
+  }
+ },
+ "table13_repeated": {
+  "KMeans": {
+   "time_s_mean": 0.0331,
+   "time_s_sd": 0.0081,
+   "silhouette_mean": 0.5137,
+   "silhouette_sd": 0.0001,
+   "noise_share": 0.0
+  },
+  "MiniBatchKMeans": {
+   "time_s_mean": 0.0546,
+   "time_s_sd": 0.0096,
+   "silhouette_mean": 0.4753,
+   "silhouette_sd": 0.0828,
+   "noise_share": 0.0
+  },
+  "Agglomerative_Ward": {
+   "time_s_mean": 2.2875,
+   "time_s_sd": 0.1167,
+   "silhouette_mean": 0.5175,
+   "silhouette_sd": 0.0,
+   "noise_share": 0.0
+  },
+  "GMM": {
+   "time_s_mean": 0.1265,
+   "time_s_sd": 0.0494,
+   "silhouette_mean": 0.411,
+   "silhouette_sd": 0.1029,
+   "noise_share": 0.0
+  },
+  "BIRCH": {
+   "time_s_mean": 0.2119,
+   "time_s_sd": 0.0085,
+   "silhouette_mean": 0.4514,
+   "silhouette_sd": 0.0,
+   "noise_share": 0.0
+  },
+  "HDBSCAN": {
+   "time_s_mean": 1.253,
+   "time_s_sd": 0.0436,
+   "silhouette_mean": 0.401,
+   "silhouette_sd": 0.0,
+   "noise_share": 0.4356
+  }
+ }
+}
