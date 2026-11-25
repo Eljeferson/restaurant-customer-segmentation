@@ -13,6 +13,9 @@ Replication package and code repository for the empirical study:
 ├── tfidf_table11.py                         # Keyword extraction protocol for review-level profiles (Table 11)
 ├── blockC_analyses.py                       # Experimental validation routines (GroupKFold, Temporal, Voronoi, Benchmarks)
 ├── blockC_results.json                      # Empirical execution metrics and results from Block C analyses
+├── RUN_MANIFEST.md                          # Traceability run manifest for Tables 6, 8, and 13 (R1-11, R1-13, R1-18)
+├── manifest_runs_tables6_8_13.json          # Machine-readable JSON run manifest with execution metadata
+├── manifest_runs_tables6_8_13.csv           # Tabular CSV run manifest for experiment tracing
 ├── requirements.txt                         # Required Python libraries and dependencies
 ├── data/
 │   ├── sentiment_spanish_benchmark_50k.csv  # Stratified benchmark corpus (50,000 reviews with RoBERTuito, XLM-R, TextBlob features)
